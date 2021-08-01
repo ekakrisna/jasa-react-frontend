@@ -26,34 +26,32 @@ export default class SignUp extends Component {
         this.setState({ signupData });
     };
     onSubmitHandler = (e) => {
-        // e.preventDefault();
-        // this.setState({ isLoading: true });
-        // axios
-        //     .post("http://localhost:8000/api/user-signup", this.state.signupData)
-        //     .then((response) => {
-        //         this.setState({ isLoading: false });
-        //         if (response.data.status === 200) {
-        //             this.setState({
-        //                 msg: response.data.message,
-        //                 signupData: {
-        //                     name: "",
-        //                     email: "",
-        //                     phone: "",
-        //                     password: "",
-        //                 },
-        //             });
-        //             setTimeout(() => {
-        //                 this.setState({ msg: "" });
-        //             }, 2000);
-        //         }
+        e.preventDefault();
+        this.setState({ isLoading: true });
+        axios.post(process.env.REACT_APP_API_ENDPOINT + "/auth/register", this.state.signupData).then((response) => {
+            this.setState({ isLoading: false });
+            if (response.data.status === 200) {
+                this.setState({
+                    msg: response.data.message,
+                    signupData: {
+                        name: "",
+                        email: "",
+                        phone: "",
+                        password: "",
+                    },
+                });
+                setTimeout(() => {
+                    this.setState({ msg: "" });
+                }, 2000);
+            }
 
-        //         if (response.data.status === "failed") {
-        //             this.setState({ msg: response.data.message });
-        //             setTimeout(() => {
-        //                 this.setState({ msg: "" });
-        //             }, 2000);
-        //         }
-        //     });
+            if (response.data.status === "failed") {
+                this.setState({ msg: response.data.message });
+                setTimeout(() => {
+                    this.setState({ msg: "" });
+                }, 2000);
+            }
+        });
     };
     render() {
         const isLoading = this.state.isLoading;
