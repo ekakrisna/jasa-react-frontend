@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
-export default class SignIn extends Component {
+export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,23 +27,21 @@ export default class SignIn extends Component {
 
     onSignInHandler = () => {
         this.setState({ isLoading: true });
-        axios.post(process.env.REACT_APP_API_ENDPOINT + "/auth/login", {
+        let url = process.env.REACT_APP_API_ENDPOINT + "/auth/login";
+        axios.post(url, {
             email: this.state.email,
             password: this.state.password,
         }).then((response) => {
             this.setState({ isLoading: false });
             if (response.data.status === 200) {
                 localStorage.setItem("isLoggedIn", true);
-                localStorage.setItem("userData", JSON.stringify(response.data.data));
+                localStorage.setItem("access_token", response.data.access_token);
                 this.setState({
                     msg: response.data.message,
                     redirect: true,
                 });
             }
-            if (
-                response.data.status === "failed" &&
-                response.data.success === undefined
-            ) {
+            if (response.data.status === "failed" && response.data.success === undefined) {
                 this.setState({
                     errMsgEmail: response.data.validation_error.email,
                     errMsgPwd: response.data.validation_error.password,
@@ -51,10 +49,7 @@ export default class SignIn extends Component {
                 setTimeout(() => {
                     this.setState({ errMsgEmail: "", errMsgPwd: "" });
                 }, 2000);
-            } else if (
-                response.data.status === "failed" &&
-                response.data.success === false
-            ) {
+            } else if (response.data.status === "failed" && response.data.success === false) {
                 this.setState({
                     errMsg: response.data.message,
                 });
@@ -72,7 +67,8 @@ export default class SignIn extends Component {
             return <Redirect to="/home" />;
         }
         const login = localStorage.getItem("isLoggedIn");
-        if (login) {
+        const access_token = localStorage.getItem("access_token");
+        if (login && access_token) {
             return <Redirect to="/home" />;
         }
         const isLoading = this.state.isLoading;
@@ -81,33 +77,17 @@ export default class SignIn extends Component {
                 <Form className="containers">
                     <FormGroup>
                         <Label for="email">Email id</Label>
-                        <Input
-                            type="email"
-                            name="email"
-                            placeholder="Enter email"
-                            value={this.state.email}
-                            onChange={this.onChangehandler}
-                        />
+                        <Input type="email" name="email" placeholder="Enter email" value={this.state.email} onChange={this.onChangehandler} autoComplete="off" />
                         <span className="text-danger">{this.state.msg}</span>
                         <span className="text-danger">{this.state.errMsgEmail}</span>
                     </FormGroup>
                     <FormGroup>
                         <Label for="password">Password</Label>
-                        <Input
-                            type="password"
-                            name="password"
-                            placeholder="Enter password"
-                            value={this.state.password}
-                            onChange={this.onChangehandler}
-                        />
+                        <Input type="password" name="password" placeholder="Enter password" value={this.state.password} onChange={this.onChangehandler} />
                         <span className="text-danger">{this.state.errMsgPwd}</span>
                     </FormGroup>
                     <p className="text-danger">{this.state.errMsg}</p>
-                    <Button
-                        className="text-center mb-4"
-                        color="success"
-                        onClick={this.onSignInHandler}
-                    >
+                    <Button className="text-center mb-4" color="success" onClick={this.onSignInHandler}>
                         Sign In
                         {isLoading ? (
                             <span

@@ -115,7 +115,7 @@ export default class SignUp extends Component {
                             <span></span>
                         )}
                     </Button>
-                    <Link to="/sign-in" className="text-white ml-5">
+                    <Link to="/login" className="text-white ml-5">
                         I'm already member
                     </Link>
                 </Form>
