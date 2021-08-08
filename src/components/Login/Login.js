@@ -1,106 +1,119 @@
-import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
+import styled from "styled-components";
 
-export default class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-            password: "",
-            msg: "",
-            isLoading: false,
-            redirect: false,
-            errMsgEmail: "",
-            errMsgPwd: "",
-            errMsg: "",
-        };
-    }
-    onChangehandler = (e) => {
-        let name = e.target.name;
-        let value = e.target.value;
-        let data = {};
-        data[name] = value;
-        this.setState(data);
-    };
+import { Button, Input } from "../elements";
+import { FacebookIcon, GoogleIcon } from "../icon";
 
-    onSignInHandler = () => {
-        this.setState({ isLoading: true });
-        let url = process.env.REACT_APP_API_ENDPOINT + "/auth/login";
-        axios.post(url, {
-            email: this.state.email,
-            password: this.state.password,
-        }).then((response) => {
-            this.setState({ isLoading: false });
-            if (response.data.status === 200) {
-                localStorage.setItem("isLoggedIn", true);
-                localStorage.setItem("access_token", response.data.access_token);
-                this.setState({
-                    msg: response.data.message,
-                    redirect: true,
-                });
-            }
-            if (response.data.status === "failed" && response.data.success === undefined) {
-                this.setState({
-                    errMsgEmail: response.data.validation_error.email,
-                    errMsgPwd: response.data.validation_error.password,
-                });
-                setTimeout(() => {
-                    this.setState({ errMsgEmail: "", errMsgPwd: "" });
-                }, 2000);
-            } else if (response.data.status === "failed" && response.data.success === false) {
-                this.setState({
-                    errMsg: response.data.message,
-                });
-                setTimeout(() => {
-                    this.setState({ errMsg: "" });
-                }, 2000);
-            }
-        }).catch((error) => {
-            console.log(error);
-        });
-    };
+import { NavLink } from "react-router-dom";
+import { colors } from "../../styles/_variables";
 
-    render() {
-        if (this.state.redirect) {
-            return <Redirect to="/home" />;
-        }
-        const login = localStorage.getItem("isLoggedIn");
-        const access_token = localStorage.getItem("access_token");
-        if (login && access_token) {
-            return <Redirect to="/home" />;
-        }
-        const isLoading = this.state.isLoading;
-        return (
-            <div>
-                <Form className="containers">
-                    <FormGroup>
-                        <Label for="email">Email id</Label>
-                        <Input type="email" name="email" placeholder="Enter email" value={this.state.email} onChange={this.onChangehandler} autoComplete="off" />
-                        <span className="text-danger">{this.state.msg}</span>
-                        <span className="text-danger">{this.state.errMsgEmail}</span>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="password">Password</Label>
-                        <Input type="password" name="password" placeholder="Enter password" value={this.state.password} onChange={this.onChangehandler} />
-                        <span className="text-danger">{this.state.errMsgPwd}</span>
-                    </FormGroup>
-                    <p className="text-danger">{this.state.errMsg}</p>
-                    <Button className="text-center mb-4" color="success" onClick={this.onSignInHandler}>
-                        Sign In
-                        {isLoading ? (
-                            <span
-                                className="spinner-border spinner-border-sm ml-5"
-                                role="status"
-                                aria-hidden="true"
-                            ></span>
-                        ) : (
-                            <span></span>
-                        )}
-                    </Button>
-                </Form>
-            </div>
-        );
-    }
+const Logo = styled.img`
+  width: auto;
+  height: 100px;
+`;
+
+const LoginWrapper = styled.div`
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.07);
+  padding: 32px 40px;
+  border-radius: 10px;
+`;
+
+const ForgotPassword = styled(NavLink)`
+  font-size: 14px;
+`;
+
+const ContactUs = styled.div`
+  font-size: 14px;
+  text-align: center;
+  padding-top: 16px;
+`;
+
+const ActionBtns = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const ManualLogin = styled.div`
+  border-bottom: 1px solid #d4d4d4;
+  padding-bottom: 24px;
+`;
+
+const AutoLogin = styled.div`
+  svg {
+    width: 24px;
+  }
+  button {
+    width: 200px;
+  }
+`;
+
+const Footer = styled.div`
+  font-size: 12px;
+  color: ${colors.secondary};
+  font-weight: 600;
+`;
+
+export default function Login() {
+  return (
+    <div className="container py-2">
+      <div className="text-center">
+        <Logo
+          src={process.env.REACT_APP_URL + "images/stack_logo.png"}
+          alt="Jasa Kita"
+          width="auto"
+          height={70}
+        />
+      </div>
+      <div className="row">
+        <div className="col-lg-6 align-self-center">
+          <img
+            src={process.env.REACT_APP_URL + "images/register_new.png"}
+            alt="Jasa Kita"
+          />
+        </div>
+        <div className="col-lg-6 p-md-5">
+          <LoginWrapper>
+            <ManualLogin>
+              <h5 className="text-center">Masuk</h5>
+              <form action="">
+                <Input
+                  label="Email or Username"
+                  type="text"
+                  placeholder="Masukan email atau username"
+                />
+                <Input
+                  label="Password"
+                  type="password"
+                  placeholder="Masukan password"
+                />
+                <ActionBtns>
+                  <Button>Masuk</Button>
+                  <ForgotPassword to="/login" className="ml-auto">
+                    Lupa kata sandi?
+                  </ForgotPassword>
+                </ActionBtns>
+              </form>
+            </ManualLogin>
+            <AutoLogin className="text-center pt-4">
+              <div>
+                <Button className="btn btn-outline-secondary">
+                  <FacebookIcon /> Facebook
+                </Button>
+              </div>
+              <div className="pt-3">
+                <Button className="btn btn-outline-secondary">
+                  <GoogleIcon /> Google
+                </Button>
+              </div>
+            </AutoLogin>
+            <ContactUs>
+              Butuh bantuan? <NavLink to="/login">Hubungi JaKi Care</NavLink>
+            </ContactUs>
+          </LoginWrapper>
+        </div>
+      </div>
+      <Footer className="text-center">
+        © {new Date().getFullYear()}, Jasa Kita
+      </Footer>
+    </div>
+  );
 }
