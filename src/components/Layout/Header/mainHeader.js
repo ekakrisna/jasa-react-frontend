@@ -136,9 +136,12 @@ export default function MainHeader() {
         >
           Masuk
         </NavLink>
-        <button className="btn btn-sm btn-secondary d-none d-md-flex">
+        <NavLink
+          to="/signup"
+          className="btn btn-sm btn-secondary d-none d-md-flex"
+        >
           Daftar
-        </button>
+        </NavLink>
         <NavToggleButton menuOpen={menuOpen} navToggleClick={navToggleClick} />
       </Container>
     </Wrapper>

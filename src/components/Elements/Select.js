@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { colors } from "../../styles/_variables";
 
-const InputField = styled.input`
+const SelectField = styled.select`
   border-color: ${colors.gray};
+  border-radius: 10px;
   &:focus {
     outline: none;
     box-shadow: none;
@@ -10,11 +11,11 @@ const InputField = styled.input`
   }
 `;
 
-export default function Input({ ...props }) {
+export default function Select({ children, ...props }) {
   return (
     <div className="form-group">
       <label htmlFor={props.inputId}>{props.label}</label>
-      <InputField
+      <SelectField
         type={props.type}
         className={props.className}
         name={props.name}
@@ -23,15 +24,17 @@ export default function Input({ ...props }) {
         required={props.required}
         autoComplete={props.autoComplete}
         ref={props.innerRef}
-      />
+      >
+        {children}
+      </SelectField>
     </div>
   );
 }
 
-Input.defaultProps = {
+Select.defaultProps = {
   label: "",
   type: "text",
-  className: "form-control",
+  className: "custom-select",
   inputId: "",
   placeholder: "",
   name: "",

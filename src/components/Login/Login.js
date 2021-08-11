@@ -6,6 +6,10 @@ import { FacebookIcon, GoogleIcon } from "../icon";
 import { NavLink } from "react-router-dom";
 import { colors } from "../../styles/_variables";
 
+const Container = styled.div`
+  position: relative;
+`;
+
 const Logo = styled.img`
   width: auto;
   height: 100px;
@@ -50,11 +54,16 @@ const Footer = styled.div`
   font-size: 12px;
   color: ${colors.secondary};
   font-weight: 600;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px 0;
+  position: absolute;
 `;
 
 export default function Login() {
   return (
-    <div className="container py-2">
+    <Container className="container py-2">
       <div className="text-center">
         <Logo
           src={process.env.REACT_APP_URL + "images/stack_logo.png"}
@@ -114,6 +123,6 @@ export default function Login() {
       <Footer className="text-center">
         © {new Date().getFullYear()}, Jasa Kita
       </Footer>
-    </div>
+    </Container>
   );
 }
