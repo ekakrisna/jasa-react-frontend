@@ -100,7 +100,7 @@ export default function MainHeader() {
 
   return (
     <Wrapper>
-      <Container className="container">
+      <Container className="px-4">
         <div>
           <Logo
             src={process.env.REACT_APP_URL + "images/logo-full.png"}

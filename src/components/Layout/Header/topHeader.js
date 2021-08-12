@@ -40,7 +40,7 @@ const NavigationBar = styled.div`
 export default function topHeader() {
   return (
     <Wrapper>
-      <div className="container">
+      <div className="px-4">
         <Content>
           <div>
             <LocationIcon />
