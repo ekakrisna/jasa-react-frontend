@@ -6,6 +6,10 @@ import { colors } from "../../styles/_variables";
 
 import { NavLink } from "react-router-dom";
 
+const Container = styled.div`
+  height: 75vh;
+`;
+
 const SignupWrapper = styled.div`
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.07);
   padding: 32px 40px;
@@ -40,13 +44,7 @@ const SignupSuggestion = styled.p`
 export default function EmailVerification({ nextStep, handleChange }) {
   return (
     <div className="container">
-      <div className="row align-items-center">
-        <div className="col-lg-6 d-none d-md-block">
-          <img
-            src={process.env.REACT_APP_URL + "images/register_new.png"}
-            alt="Jasa Kita"
-          />
-        </div>
+      <Container className="row align-items-center">
         <div className="col-lg-6 p-md-5">
           <SignupWrapper>
             <Registration>
@@ -84,7 +82,7 @@ export default function EmailVerification({ nextStep, handleChange }) {
             </Registration>
           </SignupWrapper>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

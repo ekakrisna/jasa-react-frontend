@@ -15,7 +15,7 @@ const Footer = styled.div`
   left: 0;
   width: 100%;
   padding: 16px 0;
-  position: absolute;
+  /* position: absolute; */
 `;
 
 export default function SignUp() {

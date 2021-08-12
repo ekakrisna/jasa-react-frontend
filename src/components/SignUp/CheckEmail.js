@@ -1,20 +1,20 @@
 import styled from "styled-components";
-import { colors } from "../../styles/_variables";
+import media from "../../styles/_mediaQueries";
 
 import { NavLink } from "react-router-dom";
 import Button from "../Elements/Button";
 
-const Header = styled.div`
-  height: 60px;
-  background: ${colors.secondary};
-  svg {
-    color: #fff;
+const Container = styled.div`
+  height: 65vh;
+
+  @media ${media.md} {
+    height: 75vh;
   }
 `;
 
 const CheckEmail = ({ nextStep }) => {
   return (
-    <div className="container py-4">
+    <Container className="container py-4">
       <div className="row justify-content-center text-center">
         <div className="col-md-6 p-3">
           <p>Tolong periksa email Anda untuk verifikasi.</p>
@@ -29,7 +29,7 @@ const CheckEmail = ({ nextStep }) => {
       <div className="text-center">
         <Button onClick={nextStep}>Next</Button>
       </div>
-    </div>
+    </Container>
   );
 };
 

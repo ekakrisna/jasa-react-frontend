@@ -18,7 +18,7 @@ const Title = styled.div`
 export default function FormIdentity() {
   return (
     <div className="container py-4">
-      <div className="row justify-content-center">
+      <div className="row justify-content-md-center">
         <div className="col-10 mb-0 d-flex px-0">
           <Title className="px-4 py-2">
             <strong>Isi Identitas</strong>
@@ -27,40 +27,40 @@ export default function FormIdentity() {
         <Form className="col-md-10 p-4">
           <form>
             <div className="row">
-              <div className="col-6">
+              <div className="col-md-6">
                 <Input
                   type="text"
                   label="Nama Depan"
                   placeholder="Masukan nama depan"
                 />
               </div>
-              <div className="col-6">
+              <div className="col-md-6">
                 <Input
                   type="text"
                   label="Nama Belakang"
                   placeholder="Masukan nama belakang"
                 />
               </div>
-              <div className="col-6">
+              <div className="col-md-6">
                 <Input
                   type="text"
                   label="Username"
                   placeholder="Masukan username"
                 />
               </div>
-              <div className="col-6">
+              <div className="col-md-6">
                 <Input
                   type="text"
                   label="Phone"
                   placeholder="Masukan nomor telepon"
                 />
               </div>
-              <div className="col-6">
+              <div className="col-md-6">
                 <Select label="Gender">
                   <option value="first">First</option>
                 </Select>
               </div>
-              <div className="col-6">
+              <div className="col-md-6">
                 <p className="mb-2">Date of Birth</p>
                 <div className="row">
                   <div className="col-4">
@@ -80,14 +80,14 @@ export default function FormIdentity() {
                   </div>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-md-6">
                 <Input
                   type="password"
                   label="Kata Sandi"
                   placeholder="Masukan kata sandi"
                 />
               </div>
-              <div className="col-6">
+              <div className="col-md-6">
                 <Input
                   type="password"
                   label="Konfirmasi Kata Sandi"
