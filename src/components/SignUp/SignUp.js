@@ -47,7 +47,7 @@ export default function SignUp() {
     console.log(input);
   };
 
-  const isStepOne = step == 1 ? true : false;
+  const isStepOne = step === 1 ? true : false;
 
   return (
     <div>

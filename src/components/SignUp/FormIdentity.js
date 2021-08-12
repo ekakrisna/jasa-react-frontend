@@ -32,6 +32,7 @@ export default function FormIdentity() {
                   type="text"
                   label="Nama Depan"
                   placeholder="Masukan nama depan"
+                  inputId="firstName"
                 />
               </div>
               <div className="col-md-6">
@@ -39,6 +40,7 @@ export default function FormIdentity() {
                   type="text"
                   label="Nama Belakang"
                   placeholder="Masukan nama belakang"
+                  inputId="lastName"
                 />
               </div>
               <div className="col-md-6">
@@ -46,6 +48,7 @@ export default function FormIdentity() {
                   type="text"
                   label="Username"
                   placeholder="Masukan username"
+                  inputId="username"
                 />
               </div>
               <div className="col-md-6">
@@ -53,10 +56,11 @@ export default function FormIdentity() {
                   type="text"
                   label="Phone"
                   placeholder="Masukan nomor telepon"
+                  inputId="phoneNumber"
                 />
               </div>
               <div className="col-md-6">
-                <Select label="Gender">
+                <Select label="Gender" inputId="gender">
                   <option value="first">First</option>
                 </Select>
               </div>
@@ -64,17 +68,17 @@ export default function FormIdentity() {
                 <p className="mb-2">Date of Birth</p>
                 <div className="row">
                   <div className="col-4">
-                    <Select>
+                    <Select inputId="day">
                       <option value="first">First</option>
                     </Select>
                   </div>
                   <div className="col-4">
-                    <Select>
+                    <Select inputId="month">
                       <option value="first">First</option>
                     </Select>
                   </div>
                   <div className="col-4">
-                    <Select>
+                    <Select inputId="year">
                       <option value="first">First</option>
                     </Select>
                   </div>
@@ -85,6 +89,7 @@ export default function FormIdentity() {
                   type="password"
                   label="Kata Sandi"
                   placeholder="Masukan kata sandi"
+                  inputId="password"
                 />
               </div>
               <div className="col-md-6">
@@ -92,6 +97,7 @@ export default function FormIdentity() {
                   type="password"
                   label="Konfirmasi Kata Sandi"
                   placeholder="Masukan konfirmasi kata sandi"
+                  inputId="confirmPassword"
                 />
               </div>
               <div className="col-12 text-center pt-3">
