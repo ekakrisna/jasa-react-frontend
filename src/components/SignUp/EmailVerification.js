@@ -45,6 +45,12 @@ export default function EmailVerification({ nextStep, handleChange }) {
   return (
     <div className="container">
       <Container className="row align-items-center">
+        <div className="col-lg-6 d-none d-md-block">
+          <img
+            src={process.env.REACT_APP_URL + "images/register_new.png"}
+            alt="Jasa Kita"
+          />
+        </div>
         <div className="col-lg-6 p-md-5">
           <SignupWrapper>
             <Registration>
